@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "src", /* 절대경로 지정시 기준이 되는 디렉토리 */
     "target": "es5",
     "lib": [
       "dom",
@@ -22,5 +23,9 @@
   },
   "include": [
     "src"
-  ]
+  ],
+  "paths": {
+    "pages/*": ["pages/*"],
+    "components/*" : ["components/*"]
+  }
 }
