@@ -1,5 +1,11 @@
+import Header from "components/Header";
+import SignupForm from "components/SignupForm";
+
 export default function SignUp() {
     return (
-        <h1>SignUp Page</h1>
+        <>
+            <Header/>
+            <SignupForm/>
+        </>
     );
 }
