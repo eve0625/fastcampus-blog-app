@@ -3,6 +3,7 @@ import { useState } from "react";
 import { app } from "firebaseApp";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { get } from "http";
+import { toast } from "react-toastify";
 
 export default function SignupForm() {
     const [email, setEmail] = useState<string>("");
@@ -16,15 +17,16 @@ export default function SignupForm() {
         try {
             const auth = getAuth(app);
             await createUserWithEmailAndPassword(auth, email, password);
+
+            toast.success("회원가입에 성공했습니다.");
         } catch (e) {
             console.error(e);
+            toast.error("회원가입에 실패했습니다. 다시 시도해주세요.");
         }
     };
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { target: { name, value }, } = e;
-
-        console.log(name, value);
 
         if (name === "email") { 
             setEmail(value);
