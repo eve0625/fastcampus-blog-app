@@ -7,10 +7,12 @@ import PostEdit from 'pages/posts/edit';
 import Profile from 'pages/profile';
 import Login from 'pages/login';
 import SignUp from 'pages/signup';
-import { useState } from 'react';
 
-export default function Router() {
-  const [isAuthenticated, SetIsAuthenticated] = useState<boolean>(false);
+interface RouterProps {
+  isAuthenticated: boolean;
+}
+
+export default function Router({ isAuthenticated }: RouterProps) {
 
   return (
     <Routes>
