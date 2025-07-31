@@ -1,18 +1,31 @@
 import Router from './components/Router';
-import { useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import { app } from 'firebaseApp';
-import { getAuth } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { ToastContainer } from 'react-toastify';
 
 function App() {
   const auth = getAuth(app);
-  console.log(auth);
+  const [init, setInit] = useState<boolean>(false);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!auth.currentUser);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsAuthenticated(true);
+      } else {
+        setIsAuthenticated(false);
+      }
+      setInit(true);
+    });
+
+    return () => unsubscribe();
+  }, [auth]);
 
   return (
     <>
       <ToastContainer />
-      <Router isAuthenticated={isAuthenticated} />
+      {init ? <Router isAuthenticated={isAuthenticated} /> : "initializing..."}
     </>
   );
 }

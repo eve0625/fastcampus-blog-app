@@ -63,7 +63,7 @@ export default function SignupForm() {
     };
 
     return (
-        <form action="/post" method="POST" className="form form--lg" onSubmit={onSubmit}>
+        <form className="form form--lg" onSubmit={onSubmit}>
             <h1 className="form__title">회원가입</h1>
             <div className="form__block">
                 <label htmlFor="email">이메일</label>
