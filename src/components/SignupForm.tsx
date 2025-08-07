@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { app } from "firebaseApp";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
@@ -6,6 +6,7 @@ import { get } from "http";
 import { toast } from "react-toastify";
 
 export default function SignupForm() {
+    const navigate = useNavigate();
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
@@ -19,6 +20,7 @@ export default function SignupForm() {
             await createUserWithEmailAndPassword(auth, email, password);
 
             toast.success("회원가입에 성공했습니다.");
+            navigate("/");
         } catch (e) {
             console.error(e);
             toast.error("회원가입에 실패했습니다. 다시 시도해주세요.");

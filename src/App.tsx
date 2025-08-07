@@ -11,7 +11,7 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!auth.currentUser);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, (user) => {
       if (user) {
         setIsAuthenticated(true);
       } else {
@@ -19,8 +19,6 @@ function App() {
       }
       setInit(true);
     });
-
-    return () => unsubscribe();
   }, [auth]);
 
   return (
